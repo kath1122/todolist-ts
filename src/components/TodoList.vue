@@ -1,9 +1,4 @@
 <template>
-  {{ msg }}
-  <div class="todo-header">
-    <input type="text" v-model="newItem">
-    <button type="button" @click="addItem">新增</button>
-  </div>
   <div class="todo-list">
     <ul v-for="(item, index) in items" :key="item.id">
       <li>
@@ -14,6 +9,7 @@
   </div>
   <hr>
   <div class="todo-footer">
+    {{ cacheData }}
   </div>
 </template>
 
@@ -22,48 +18,25 @@
 //   msg: string
 // }>()
 import { defineComponent, ref } from 'vue'
+import { useTodoStore } from '../stores/todo'
 
 export default defineComponent({
   name: 'TodoList',
-  props: {
-    msg: {
-      type: String,
-      require: true
-    }
-  },
   setup: () => {
-    const newItem = ref('')
+    const todoStore = useTodoStore()
     let cacheData = {}
-    const items = ref([
-      {
-        id: 1,
-        text: 'item1-aaaa'
-      }
-    ])
-    const addItem = () => {
-      if(!newItem.value.trim()) {
-        console.log('請輸入值')
-        return
-      }
-      const todo = {
-        id: Date.now(),
-        text: newItem.value
-      }
-      items.value.unshift(todo)
-      newItem.value = ''
-    }
+    const items = todoStore.todoItems
+    
     const deleteItem = (index: number) => {
-      items.value.splice(index,1)
+      todoStore.deleteItem(index)
     }
-    const saveItem = () => {
+    // const saveItem = () => {
 
-    }
+    // }
     
     return {
       items,
       cacheData,
-      newItem,
-      addItem,
       deleteItem,
     }
   }
