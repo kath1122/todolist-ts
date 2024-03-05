@@ -1,5 +1,4 @@
 <template>
-    {{ msg }}
     <div class="todo-header">
       <input type="text" v-model="newItem">
       <button type="button" @click="addItem">新增</button>
@@ -12,12 +11,12 @@
   
   export default defineComponent({
     name: 'TodoHeader',
-    props: {
-      msg: {
-        type: String,
-        require: true
-      }
-    },
+    // props: {
+    //   msg: {
+    //     type: String,
+    //     require: true
+    //   }
+    // },
     setup: () => {
       const todoStore = useTodoStore()
 

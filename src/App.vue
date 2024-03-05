@@ -14,7 +14,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <TodoHeader msg="ToDoList"></TodoHeader>
+  <TodoHeader></TodoHeader>
   <TodoList></TodoList>
 </template>
 
