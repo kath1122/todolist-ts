@@ -6,28 +6,13 @@
   </div>
 </template>
 
-<script lang="ts">
-// defineProps<{
-//   msg: string
-// }>()
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
 import { useTodoStore } from '../stores/todo'
 import TodoItem from './TodoItem.vue'
 
-export default defineComponent({
-  name: 'TodoList',
-  components: {
-    TodoItem
-  },
-  setup: () => {
-    const todoStore = useTodoStore()
-    const items = todoStore.todoItems
+const todoStore = useTodoStore()
+const items = todoStore.todoItems
     
-    return {
-      items,
-    }
-  }
-})
 </script>
 
 <style scoped>
