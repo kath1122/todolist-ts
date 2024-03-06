@@ -16,4 +16,5 @@ const items = todoStore.todoItems
 </script>
 
 <style scoped>
+.todo-list { margin-left: -40px;}
 </style>

@@ -1,15 +1,21 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 
-import type { Todo } from '../types/todo'
+import type { Todo, CurItem } from '../types/todo'
 
 export const useTodoStore = defineStore('todo', () => {
-  const todoItems = ref([
+  const todoItems = ref<Todo[]>([
     {
       id: 1,
-      text: 'item1-aaaa'
-    }
-  ] as Todo[])
+      text: 'TS',
+      isComplete: false
+    },
+    {
+      id: 2,
+      text: 'Vue3',
+      isComplete: false
+    },
+  ])
 
   function addItem(todo: Todo) {
     todoItems.value.unshift(todo)
@@ -19,12 +25,16 @@ export const useTodoStore = defineStore('todo', () => {
     todoItems.value.splice(index, 1)
   }
 
-  function updateItem(text: string, index: number){
-    todoItems.value[index].text = text
+  function updateItem(item: CurItem, index: number){
+    todoItems.value[index].isComplete = item.isComplete
+    todoItems.value[index].text = item.text
   }
+
+  const completeItemsLength = computed(() => todoItems.value.filter(item => item.isComplete).length)
 
   return { 
     todoItems,
+    completeItemsLength,
     addItem,
     deleteItem,
     updateItem
