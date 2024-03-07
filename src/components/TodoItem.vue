@@ -4,7 +4,7 @@
         <span class="fix-width" v-show="!isEdit">{{props.item?.text}}</span>
         <input class="fix-width" v-show="isEdit" type="text" v-model="editData.text">
         <button v-show="isEdit" type="button" @click="saveItem">保存</button>
-        <button v-show="!isEdit" type="button" @click="editItem(item)">編輯</button>
+        <button v-show="!isEdit" type="button" @click="editItem">編輯</button>
         <button type="button" @click="deleteItem">刪除</button>
     </li>
 </template>
@@ -25,22 +25,17 @@
     }
   })
 
-  const {item, index} = props
+  const {item} = props
   const isEdit = ref(false)
   const todoStore = useTodoStore()
   const isComplete = ref<boolean>(item.isComplete)
   const editData = ref<CurItem>({text: '', isComplete})
-  const curIdx = ref<number>(0)
-
     
   const deleteItem = () => {
-    todoStore.deleteItem(props.index)
+    todoStore.deleteItem(item.id)
   }
-  const editItem = (item: Todo) => {
+  const editItem = () => {
     isEdit.value = true
-    curIdx.value = todoStore.todoItems.findIndex(function(todo){
-      return todo.id === item.id;
-    })
     editData.value.text = item.text
     editData.value.isComplete = item.isComplete
   }
@@ -49,7 +44,7 @@
     if(!editData.value.text){
         return
     }
-    todoStore.updateItem(editData.value, curIdx.value)
+    todoStore.updateItem(editData.value, item.id)
     editData.value.text = ''
     isEdit.value = false
   }

@@ -7,7 +7,7 @@
   import { computed } from 'vue';
   import { useTodoStore } from '../stores/todo'
   
-  const completeItems = computed(() => useTodoStore().completeItemsLength);
+  const completeItems = computed(() => useTodoStore().todoItems.filter(item => item.isComplete).length)
   const total = computed(() => useTodoStore().todoItems.length)
   </script>
   

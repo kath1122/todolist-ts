@@ -17,24 +17,27 @@ export const useTodoStore = defineStore('todo', () => {
     },
   ])
 
+  function getItemIndex(id: number){
+    return todoItems.value.findIndex(function(todo){
+        return todo.id === id;
+      })
+  }
+
   function addItem(todo: Todo) {
     todoItems.value.unshift(todo)
   }
 
-  function deleteItem(index: number) {
-    todoItems.value.splice(index, 1)
+  function deleteItem(id: number) {
+    todoItems.value.splice(getItemIndex(id), 1)
   }
 
-  function updateItem(item: CurItem, index: number){
-    todoItems.value[index].isComplete = item.isComplete
-    todoItems.value[index].text = item.text
+  function updateItem(item: CurItem, id: number){
+    todoItems.value[getItemIndex(id)].isComplete = item.isComplete
+    todoItems.value[getItemIndex(id)].text = item.text
   }
-
-  const completeItemsLength = computed(() => todoItems.value.filter(item => item.isComplete).length)
 
   return { 
     todoItems,
-    completeItemsLength,
     addItem,
     deleteItem,
     updateItem
