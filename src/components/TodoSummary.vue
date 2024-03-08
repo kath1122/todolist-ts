@@ -1,6 +1,7 @@
 <template>
       <span class="completed sum">已完成: {{ completeItems }}</span> / 
       <span class="sum">全部: {{ total }}</span>
+      <button type="button" @click="clearCompletedTodos">清除已完成</button>
 </template>
   
   <script setup lang="ts">
@@ -9,6 +10,14 @@
   
   const completeItems = computed(() => useTodoStore().todoItems.filter(item => item.isComplete).length)
   const total = computed(() => useTodoStore().todoItems.length)
+  
+  const clearCompletedTodos = () => {
+    useTodoStore().todoItems.forEach((item)=>{
+      if(item.isComplete){
+        useTodoStore().deleteItem(item.id)
+      }
+    })
+  }
   </script>
   
   <style scoped>

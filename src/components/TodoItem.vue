@@ -1,6 +1,6 @@
 <template>
     <li class="flex">
-        <input :disabled="!isEdit" type="checkbox" v-model="editData.isComplete">
+        <input type="checkbox" :checked="editData.isComplete" @change="switchCompleteStatus">
         <span class="fix-width" v-show="!isEdit">{{props.item?.text}}</span>
         <input class="fix-width" v-show="isEdit" type="text" v-model="editData.text">
         <button v-show="isEdit" type="button" @click="saveItem">保存</button>
@@ -29,7 +29,7 @@
   const isEdit = ref(false)
   const todoStore = useTodoStore()
   const isComplete = ref<boolean>(item.isComplete)
-  const editData = ref<CurItem>({text: '', isComplete})
+  const editData = ref<CurItem>({text: '', isComplete: isComplete})
     
   const deleteItem = () => {
     todoStore.deleteItem(item.id)
@@ -49,6 +49,11 @@
     isEdit.value = false
   }
       
+  const switchCompleteStatus = (event) => {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    editData.value = {...item, isComplete: isChecked}
+    todoStore.updateItem(editData.value, item.id)
+  }
   </script>
   
   <style scoped>

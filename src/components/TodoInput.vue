@@ -1,6 +1,6 @@
 <template>
     <div class="todo-header margin">
-      <input type="text" v-model="newItem" class="fix-width">
+      <input type="text" v-model="newItem" placeholder="輸入一條代辦事項"  class="fix-width">
       <button type="button" @click="addItem">新增</button>
     </div>
   </template>
