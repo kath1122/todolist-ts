@@ -1,6 +1,6 @@
 <template>
   <div class="todo-list">
-    <ul v-for="(item, index) in items" :key="item.id">
+    <ul v-for="(item, index) in todoItems" :key="item.id">
       <TodoItem :item="item" :index="index"></TodoItem>
     </ul>
   </div>
@@ -8,10 +8,11 @@
 
 <script setup lang="ts">
 import { useTodoStore } from '../stores/todo'
+import { storeToRefs } from 'pinia';
 import TodoItem from './TodoItem.vue'
 
 const todoStore = useTodoStore()
-const items = todoStore.todoItems
+const { todoItems } = storeToRefs(todoStore)
     
 </script>
 

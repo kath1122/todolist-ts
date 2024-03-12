@@ -25,7 +25,7 @@
     }
   })
 
-  const {item} = props
+  const {item, index} = props
   const isEdit = ref(false)
   const todoStore = useTodoStore()
   const isComplete = ref<boolean>(item.isComplete)
@@ -44,7 +44,7 @@
     if(!editData.value.text){
         return
     }
-    todoStore.updateItem(editData.value, item.id)
+    todoStore.updateItem(editData.value, index)
     editData.value.text = ''
     isEdit.value = false
   }
