@@ -15,11 +15,8 @@
   const total = computed(() => useTodoStore().todoItems.length)
   
   const clearCompletedTodos = () => {
-    useTodoStore().todoItems.forEach((item)=>{
-      if(item.isComplete){
-        useTodoStore().deleteItem(item.id)
-      }
-    })
+    const completedTodos = useTodoStore().todoItems.filter(item => item.isComplete);
+    completedTodos.forEach(completedItem => useTodoStore().deleteItem(completedItem.id));
   }
   </script>
   
