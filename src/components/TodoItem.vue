@@ -32,7 +32,7 @@
   const editData = ref<CurItem>({text: '', isComplete: isComplete})
     
   const deleteItem = () => {
-    todoStore.deleteItem(item.id)
+    todoStore.deleteItem(index)
   }
   const editItem = () => {
     isEdit.value = true
@@ -52,7 +52,7 @@
   const switchCompleteStatus = (event) => {
     const isChecked = (event.target as HTMLInputElement).checked;
     editData.value = {...item, isComplete: isChecked}
-    todoStore.updateItem(editData.value, item.id)
+    todoStore.updateItem(editData.value, index)
   }
   </script>
   

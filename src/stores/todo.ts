@@ -23,8 +23,8 @@ export const useTodoStore = defineStore(
     /**
      * TODO 可以直接filter掉就好了 => ok!
      */
-    function deleteItem(id: number) {
-      todoItems.value = todoItems.value.filter(item => item.id !== id)
+    function deleteItem(index: number) {
+      todoItems.value = todoItems.value.filter((item, idx) => idx !== index)
     }
 
     /**
