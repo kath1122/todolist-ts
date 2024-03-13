@@ -6,9 +6,11 @@ import TodoSummary from './components/TodoSummary.vue'
 </script>
 
 <template>
-  <TodoInput></TodoInput>
-  <TodoList></TodoList>
-  <TodoSummary></TodoSummary>
+    <div class="justify-center items-center">
+      <TodoInput></TodoInput>
+      <TodoList></TodoList>
+      <TodoSummary></TodoSummary>
+    </div>
 </template>
 
 <style scoped>

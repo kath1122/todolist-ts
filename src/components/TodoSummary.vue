@@ -1,9 +1,8 @@
 <template>
-  <hr>
-  <span class="inline-flex w-52">
+  <div class="inline-flex w-52 items-center">
     <span class="text-green-600 font-bold">Completed: {{ completeItems }}</span> / 
     <span class="font-bold">Total: {{ total }}</span>
-  </span>
+  </div>
   <button class="bg-red-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded" type="button" @click="clearCompletedTodos">Clear Task completed</button>
 </template>
   

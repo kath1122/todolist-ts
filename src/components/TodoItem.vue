@@ -1,11 +1,13 @@
 <template>
     <li class="inline-flex items-center">
+      <div class="inline w-52">
         <input class="form-checkbox text-green-500 h-5 w-5" type="checkbox" :checked="editData.isComplete" @change="switchCompleteStatus">
         <span class="w-48 my-1.5 px-4 py-1.5" v-show="!isEdit">{{props.item?.text}}</span>
-        <input class="w-48 border border-gray-300 px-4 py-0.5 rounded-l focus:border-green-500 focus:outline-none" v-show="isEdit" type="text" v-model="editData.text">
-        <button class="bg-green-600 text-white mx-1 my-1.5 px-4 py-1.5 rounded" v-show="isEdit" type="button" @click="saveItem">save</button>
-        <button class="bg-yellow-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded" v-show="!isEdit" type="button" @click="editItem">edit</button>
-        <button class="bg-red-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded" type="button" @click="deleteItem">delete</button>
+        <input class="border border-gray-300 rounded-l focus:border-green-500 focus:outline-none" v-show="isEdit" type="text" v-model="editData.text">
+      </div>
+      <button class="bg-green-600 text-white mx-1 my-1.5 px-4 py-1.5 rounded" v-show="isEdit" type="button" @click="saveItem">save</button>
+      <button class="bg-yellow-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded" v-show="!isEdit" type="button" @click="editItem">edit</button>
+      <button class="bg-red-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded" type="button" @click="deleteItem">delete</button>
     </li>
 </template>
   
