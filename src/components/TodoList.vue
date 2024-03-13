@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-list">
+  <div>
     <ul v-for="(item, index) in todoItems" :key="`${item.id}${index}`">
       <TodoItem :item="item" :index="index"></TodoItem>
     </ul>
@@ -15,7 +15,3 @@ const todoStore = useTodoStore()
 const { todoItems } = storeToRefs(todoStore)
     
 </script>
-
-<style scoped>
-.todo-list { margin-left: -40px;}
-</style>

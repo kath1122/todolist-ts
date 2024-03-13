@@ -1,10 +1,10 @@
 <template>
   <hr>
-  <span class="fix-width">
-    <span class="completed sum">已完成: {{ completeItems }}</span> / 
-    <span class="sum">全部: {{ total }}</span>
+  <span class="inline-flex w-52">
+    <span class="text-green-600 font-bold">Completed: {{ completeItems }}</span> / 
+    <span class="font-bold">Total: {{ total }}</span>
   </span>
-  <button type="button" @click="clearCompletedTodos">清除已完成</button>
+  <button class="bg-red-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded" type="button" @click="clearCompletedTodos">Clear Task completed</button>
 </template>
   
   <script setup lang="ts">
@@ -20,15 +20,6 @@
   </script>
   
   <style scoped>
-  .completed {
-    color: green;
-  }
-  .sum {
-    font-weight: bold;
-  }
-  .fix-width{
-    display: inline-block;
-    width: 213px;
-  }
+  
   </style>
   

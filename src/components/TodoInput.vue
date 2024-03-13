@@ -1,7 +1,7 @@
 <template>
     <div class="todo-header margin">
-      <input type="text" v-model="newItem" placeholder="輸入一條代辦事項"  class="fix-width">
-      <button type="button" @click="addItem">新增</button>
+      <input class="w-52 border border-gray-300 px-4 py-2 rounded-l focus:border-green-500 focus:outline-none" type="text" v-model="newItem" placeholder="輸入一條代辦事項">
+      <button class="bg-green-600 text-white mx-1 my-1.5 px-4 py-2 rounded cursor-pointer" type="button" @click="addItem">Submit</button>
     </div>
   </template>
   

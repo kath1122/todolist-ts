@@ -1,11 +1,11 @@
 <template>
-    <li class="flex">
-        <input type="checkbox" :checked="editData.isComplete" @change="switchCompleteStatus">
-        <span class="fix-width" v-show="!isEdit">{{props.item?.text}}</span>
-        <input class="fix-width" v-show="isEdit" type="text" v-model="editData.text">
-        <button v-show="isEdit" type="button" @click="saveItem">保存</button>
-        <button v-show="!isEdit" type="button" @click="editItem">編輯</button>
-        <button type="button" @click="deleteItem">刪除</button>
+    <li class="inline-flex items-center">
+        <input class="form-checkbox text-green-500 h-5 w-5" type="checkbox" :checked="editData.isComplete" @change="switchCompleteStatus">
+        <span class="w-48 my-1.5 px-4 py-1.5" v-show="!isEdit">{{props.item?.text}}</span>
+        <input class="w-48 border border-gray-300 px-4 py-0.5 rounded-l focus:border-green-500 focus:outline-none" v-show="isEdit" type="text" v-model="editData.text">
+        <button class="bg-green-600 text-white mx-1 my-1.5 px-4 py-1.5 rounded" v-show="isEdit" type="button" @click="saveItem">save</button>
+        <button class="bg-yellow-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded" v-show="!isEdit" type="button" @click="editItem">edit</button>
+        <button class="bg-red-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded" type="button" @click="deleteItem">delete</button>
     </li>
 </template>
   
