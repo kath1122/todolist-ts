@@ -5,17 +5,18 @@
         <span class="w-48 my-1.5 px-4 py-1.5" v-show="!isEdit">{{props.item?.text}}</span>
         <input class="border border-gray-300 rounded-l focus:border-green-500 focus:outline-none" v-show="isEdit" type="text" v-model="editData.text">
       </div>
+      <!-- TODO text-white mx-1 my-1.5 px-4 py-1.5 等重複的 可以用 @apply 抽出 -->
       <button class="bg-green-600 text-white mx-1 my-1.5 px-4 py-1.5 rounded" v-show="isEdit" type="button" @click="saveItem">save</button>
       <button class="bg-yellow-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded" v-show="!isEdit" type="button" @click="editItem">edit</button>
       <button class="bg-red-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded" type="button" @click="deleteItem">delete</button>
     </li>
 </template>
-  
+
   <script setup lang="ts">
   import { ref } from 'vue'
   import { useTodoStore } from '../stores/todo'
   import type { Todo,CurItem } from '@/types/todo';
-  
+
   const props = defineProps({
     item: {
         type: Object as () => Todo,
@@ -32,7 +33,7 @@
   const todoStore = useTodoStore()
   const isComplete = ref<boolean>(item.isComplete)
   const editData = ref<CurItem>({text: '', isComplete: isComplete})
-    
+
   const deleteItem = () => {
     todoStore.deleteItem(index)
   }
@@ -50,15 +51,16 @@
     editData.value.text = ''
     isEdit.value = false
   }
-      
+
   const switchCompleteStatus = (event) => {
     const isChecked = (event.target as HTMLInputElement).checked;
     editData.value = {...item, isComplete: isChecked}
     todoStore.updateItem(editData.value, index)
   }
   </script>
-  
+
   <style scoped>
+  // TODO 用不到的class就刪除
   .flex{
     display: flex;
   }
@@ -67,4 +69,3 @@
     width: 200px;
   }
   </style>
-  
