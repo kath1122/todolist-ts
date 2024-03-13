@@ -8,13 +8,6 @@ export const useTodoStore = defineStore(
   () => {
     const todoItems = ref<Todo[]>([])
 
-    function getItemIndex(id: number){
-      return todoItems.value.findIndex(function(todo){
-          return todo.id === id;
-        })
-    }
-
-
     function addItem(todo: Todo) {
       todoItems.value.unshift(todo)
     }
