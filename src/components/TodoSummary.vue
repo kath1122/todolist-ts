@@ -9,10 +9,12 @@
   <script setup lang="ts">
   import { computed } from 'vue';
   import { useTodoStore } from '../stores/todo'
+  import { storeToRefs } from 'pinia';
 
-  // TODO useTodoStore().todoItems 可以用storeToRefs抽出
-  const completeItems = computed(() => useTodoStore().todoItems.filter(item => item.isComplete).length)
-  const total = computed(() => useTodoStore().todoItems.length)
+  const todoStore = useTodoStore()
+  const { todoItems } = storeToRefs(todoStore)
+  const completeItems = computed(() => todoItems.value.filter(item => item.isComplete).length)
+  const total = computed(() => todoItems.value.length)
 
   const clearCompletedTodos = () => {
     useTodoStore().todoItems = useTodoStore().todoItems.filter(item => !item.isComplete)

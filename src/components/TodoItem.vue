@@ -58,14 +58,3 @@
     todoStore.updateItem(editData.value, index)
   }
   </script>
-
-  <style scoped>
-  // TODO 用不到的class就刪除
-  .flex{
-    display: flex;
-  }
-  .fix-width{
-    display: inline-block;
-    width: 200px;
-  }
-  </style>

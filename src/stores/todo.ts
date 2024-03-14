@@ -12,19 +12,10 @@ export const useTodoStore = defineStore(
       todoItems.value.unshift(todo)
     }
 
-
-    /**
-     * TODO 可以直接filter掉就好了 => ok!
-     * 做完了comment就刪掉吧！
-     */
     function deleteItem(index: number) {
       todoItems.value = todoItems.value.filter((item, idx) => idx !== index)
     }
 
-    /**
-     * TODO 既然直接有index了 何不直接用他的index修改？ => ok!
-     * 做完了comment就刪掉吧！
-     */
     function updateItem(item: CurItem, index: number){
       todoItems.value[index].isComplete = item.isComplete
       todoItems.value[index].text = item.text
