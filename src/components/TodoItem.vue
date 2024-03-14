@@ -1,8 +1,8 @@
 <template>
-    <li class="inline-flex items-center">
-      <div class="inline w-52">
+    <li class="inline-flex">
+      <div class="inline-flex w-52 items-center">
         <input class="form-checkbox text-green-500 h-5 w-5" type="checkbox" :checked="editData.isComplete" @change="switchCompleteStatus">
-        <span class="w-48 my-1.5 px-4 py-1.5" v-show="!isEdit">{{props.item?.text}}</span>
+        <span class="w-48 my-1.5 px-4 py-1.5" :class="{'text-gray-400': editData.isComplete }" v-show="!isEdit">{{props.item?.text}}</span>
         <input class="border border-gray-300 rounded-l focus:border-green-500 focus:outline-none" v-show="isEdit" type="text" v-model="editData.text">
       </div>
       <button class="bg-green-600 button" v-show="isEdit" type="button" @click="saveItem">save</button>

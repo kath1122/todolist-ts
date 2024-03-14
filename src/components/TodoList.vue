@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="todoItems && todoItems.length">
     <ul v-for="(item, index) in todoItems" :key="`${item.id}${index}`">
       <TodoItem :item="item" :index="index"></TodoItem>
     </ul>

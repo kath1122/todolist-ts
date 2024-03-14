@@ -3,24 +3,33 @@
     <span class="text-green-600 font-bold">Completed: {{ completeItems }}</span> /
     <span class="font-bold">Total: {{ total }}</span>
   </div>
-  <button class="bg-red-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded" type="button" @click="clearCompletedTodos">Clear Task completed</button>
+  <button class="del-button" type="button" @click="clearCompletedTodos">Clear Task completed</button>
+  <button class="del-button" type="button" @click="clearAll">Clear ALL</button>
 </template>
 
   <script setup lang="ts">
   import { computed } from 'vue';
   import { useTodoStore } from '../stores/todo'
-  import { storeToRefs } from 'pinia';
 
-  const todoStore = useTodoStore()
-  const { todoItems } = storeToRefs(todoStore)
-  const completeItems = computed(() => todoItems.value.filter(item => item.isComplete).length)
-  const total = computed(() => todoItems.value.length)
+  const completeItems = computed(() => {
+    const items = useTodoStore().todoItems
+    return items ? items.filter(item => item && item.isComplete).length : 0;
+  })
+  const total = computed(() => {
+    const items = useTodoStore().todoItems
+    return items? items.length : 0
+  })
 
   const clearCompletedTodos = () => {
     useTodoStore().todoItems = useTodoStore().todoItems.filter(item => !item.isComplete)
   }
+  const clearAll = () => {
+    useTodoStore().todoItems = []
+  }
   </script>
 
-  <style scoped>
-
-  </style>
+<style lang="postcss" scoped>
+.del-button {
+  @apply bg-red-400 text-white mx-1 my-1.5 px-4 py-1.5 rounded;
+}
+</style>
