@@ -1,5 +1,9 @@
 <template>
     <div>
+      <input class="w-52 border border-gray-300 px-4 py-2 rounded-l focus:border-green-500 focus:outline-none" type="text" v-model="searchInput" placeholder="Search a todo item.">
+      <button class="bg-green-600 text-white mx-1 my-1.5 px-4 py-2 rounded cursor-pointer" type="button" @click="searchItem">Search</button>
+    </div>
+    <div>
       <input class="w-52 border border-gray-300 px-4 py-2 rounded-l focus:border-green-500 focus:outline-none" type="text" v-model="newItem" placeholder="Enter a todo item.">
       <button class="bg-green-600 text-white mx-1 my-1.5 px-4 py-2 rounded cursor-pointer" type="button" @click="addItem">Submit</button>
     </div>
@@ -12,6 +16,7 @@
   
   const todoStore = useTodoStore()
   const newItem = ref<string>('')
+  const searchInput = ref<string>('')
   
   const addItem = () => {
     if(!newItem.value.trim()) {
@@ -25,6 +30,10 @@
     }
     todoStore.addItem(todo)
     newItem.value = ''
+  }
+  const searchItem = () => {
+    // const term = searchInput.value.toLowerCase();
+    // todoStore.todoItems = todoStore.todoItems.filter(task => task.text.toLowerCase().includes(term));
   }
 
   </script>

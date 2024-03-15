@@ -1,7 +1,7 @@
 <template>
     <li class="inline-flex">
       <div class="inline-flex w-52 items-center">
-        <input class="form-checkbox text-green-500 h-5 w-5" type="checkbox" :checked="editData.isComplete" @change="switchCompleteStatus">
+        <input class="form-checkbox text-green-500 h-5 w-5" type="checkbox" :checked="props.item.isComplete" @change="switchCompleteStatus">
         <span class="w-48 my-1.5 px-4 py-1.5" :class="{'text-gray-400': editData.isComplete }" v-show="!isEdit">{{props.item?.text}}</span>
         <input class="border border-gray-300 rounded-l focus:border-green-500 focus:outline-none" v-show="isEdit" type="text" v-model="editData.text">
       </div>
@@ -27,34 +27,33 @@ const props = defineProps({
   }
 })
 
-const {item, index} = props
 const isEdit = ref(false)
 const todoStore = useTodoStore()
-const isComplete = ref<boolean>(item.isComplete)
+const isComplete = ref<boolean>(props.item.isComplete)
 const editData = ref<CurItem>({text: '', isComplete: isComplete})
 
 const deleteItem = () => {
-  todoStore.deleteItem(index)
+  todoStore.deleteItem(props.index)
 }
 const editItem = () => {
   isEdit.value = true
-  editData.value.text = item.text
-  editData.value.isComplete = item.isComplete
+  editData.value.text = props.item.text
+  editData.value.isComplete = props.item.isComplete
 }
 
 const saveItem = () => {
   if(!editData.value.text){
       return
   }
-  todoStore.updateItem(editData.value, index)
+  todoStore.updateItem(editData.value, props.index)
   editData.value.text = ''
   isEdit.value = false
 }
 
 const switchCompleteStatus = (event) => {
   const isChecked = (event.target as HTMLInputElement).checked;
-  editData.value = {...item, isComplete: isChecked}
-  todoStore.updateItem(editData.value, index)
+  editData.value = {...props.item, isComplete: isChecked}
+  todoStore.updateItem(editData.value, props.index)
 }
 </script>
 <style lang="postcss" scoped>

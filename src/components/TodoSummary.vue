@@ -4,7 +4,7 @@
     <span class="font-bold">Total: {{ total }}</span>
   </div>
   <button class="del-button" type="button" @click="clearCompletedTodos">Clear Task completed</button>
-  <button class="del-button" type="button" @click="clearAll">Clear ALL</button>
+  <button class="del-button" type="button" @click="selectItem">Checked ALL</button>
 </template>
 
   <script setup lang="ts">
@@ -23,9 +23,11 @@
   const clearCompletedTodos = () => {
     useTodoStore().todoItems = useTodoStore().todoItems.filter(item => !item.isComplete)
   }
-  const clearAll = () => {
-    useTodoStore().todoItems = []
+
+  const selectItem = () => {
+    useTodoStore().todoItems.forEach(item => item.isComplete = true)
   }
+
   </script>
 
 <style lang="postcss" scoped>
