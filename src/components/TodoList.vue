@@ -3,13 +3,13 @@
       <input class="padding w-52 border border-gray-300 rounded-l focus:border-green-500 focus:outline-none" type="text" v-model="searchInputText" placeholder="Search a todo item.">
       <button class="padding bg-green-600 text-white mx-1 my-1.5 rounded cursor-pointer" type="button" @click="searchItem">Search</button>
   </div>
-  <div v-if="!isSearch && todoItems && todoItems.length">
+  <div v-if="!isFilter && todoItems && todoItems.length">
     <ul v-for="(item, index) in todoItems" :key="`${item.id}${index}`">
       <TodoItem :item="item" :index="index"></TodoItem>
     </ul>
   </div>
   <div v-else>
-    <ul v-for="(item, index) in todoArr" :key="`${item.id}${index}`">
+    <ul v-for="(item, index) in filterItems" :key="`${item.id}${index}`">
       <TodoItem :item="item" :index="index"></TodoItem>
     </ul>
   </div>
@@ -24,22 +24,22 @@ import { computed, ref, watch } from 'vue';
 const searchInputText = ref<string>('')
 const todoStore = useTodoStore()
 const { todoItems } = storeToRefs(todoStore)
-const isSearch = ref(false)
-let todoArr = ref([])
+const isFilter = ref(false)
+let filterItems = ref([])
 
 const searchItem = () => {
   const term = searchInputText.value.toLowerCase();
   if(term){
-    isSearch.value = true
+    isFilter.value = true
   } else {
-    isSearch.value = false
+    isFilter.value = false
   }
-  todoArr.value = todoStore.todoItems.filter(task => task.text.toLowerCase().includes(term));
+  filterItems.value = todoStore.todoItems.filter(task => task.text.toLowerCase().includes(term));
 }
 
 watch(searchInputText, (newValue) => {
   if(!newValue){
-    isSearch.value = false
+    isFilter.value = false
   }
 });
 
