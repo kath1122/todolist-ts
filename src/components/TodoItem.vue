@@ -30,6 +30,7 @@ const props = defineProps({
 const isEdit = ref(false)
 const todoStore = useTodoStore()
 const isComplete = ref<boolean>(props.item.isComplete)
+                                              // TODO 型別錯誤 isComplete.value才是boolean
 const editData = ref<CurItem>({text: '', isComplete: isComplete})
 
 const deleteItem = () => {
@@ -50,6 +51,8 @@ const saveItem = () => {
   isEdit.value = false
 }
 
+
+// TODO event的型別可以去查詢MDN試著加上
 const switchCompleteStatus = (event) => {
   const isChecked = (event.target as HTMLInputElement).checked;
   editData.value = {...props.item, isComplete: isChecked}

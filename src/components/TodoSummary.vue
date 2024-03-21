@@ -11,6 +11,7 @@
   import { computed } from 'vue';
   import { useTodoStore } from '../stores/todo'
 
+  // TODO 命名問題 completeItems => completeItemsCount or completedCount
   const completeItems = computed(() => {
     const items = useTodoStore().todoItems
     return items ? items.filter(item => item && item.isComplete).length : 0;
@@ -24,6 +25,8 @@
     useTodoStore().todoItems = useTodoStore().todoItems.filter(item => !item.isComplete)
   }
 
+
+  // TODO 命名問題 selectItem => 裡面的行為是把全部items狀態改為完成 與函式名稱意義不同
   const selectItem = () => {
     useTodoStore().todoItems.forEach(item => item.isComplete = true)
   }
