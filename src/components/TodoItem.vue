@@ -30,8 +30,7 @@ const props = defineProps({
 const isEdit = ref(false)
 const todoStore = useTodoStore()
 const isComplete = ref<boolean>(props.item.isComplete)
-                                              // TODO 型別錯誤 isComplete.value才是boolean
-const editData = ref<CurItem>({text: '', isComplete: isComplete})
+const editData = ref<CurItem>({text: '', isComplete: isComplete.value})
 
 const deleteItem = () => {
   todoStore.deleteItem(props.index)
