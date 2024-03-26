@@ -15,6 +15,7 @@
 import { ref } from 'vue'
 import { useTodoStore } from '../stores/todo'
 import type { Todo,CurItem } from '@/types/todo';
+import { ElMessageBox } from "element-plus";
 
 const props = defineProps({
   item: {
@@ -33,7 +34,13 @@ const isComplete = ref<boolean>(props.item.isComplete)
 const editData = ref<CurItem>({text: '', isComplete: isComplete.value})
 
 const deleteItem = () => {
-  todoStore.deleteItem(props.index)
+  ElMessageBox.confirm(`确定删除吗？`, "删除操作", {
+    confirmButtonText: "删除",
+    cancelButtonText: "取消",
+    type: "warning",
+  }).then(() => {
+    todoStore.deleteItem(props.index)
+  });
 }
 const editItem = () => {
   isEdit.value = true

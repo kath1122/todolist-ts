@@ -1,8 +1,11 @@
 <template>
-  <div>
-      <input class="padding w-52 border border-gray-300 rounded-l focus:border-green-500 focus:outline-none" type="text" v-model="searchInputText" placeholder="Search a todo item.">
-      <button class="padding bg-green-600 text-white mx-1 my-1.5 rounded cursor-pointer" type="button" @click="searchTodo">Search</button>
-  </div>
+  <el-input
+    class="w-52 max-w-[600px]"
+    v-model="searchInputText"
+    placeholder="Search a todo item."
+  >
+    <template #prepend>Search</template>
+  </el-input>
   <div v-if="todoItems && todoItems.length">
     <ul v-for="(item, index) in searchResult" :key="`${item.id}${index}`">
       <TodoItem :item="item" :index="index"></TodoItem>
@@ -20,12 +23,10 @@ const searchInputText = ref<string>('')
 const todoStore = useTodoStore()
 const { todoItems } = storeToRefs(todoStore)
 const isFilter = ref(false)
-let searchResult = ref([...todoItems.value])
 
-const searchTodo = () => {
-  const term = searchInputText.value.toLowerCase();
-  searchResult.value = todoStore.todoItems.filter(task => task.text.toLowerCase().includes(term));
-}
+const searchResult = computed(() => {
+  return todoStore.todoItems.filter(task => task.text.toLowerCase().includes(searchInputText.value.toLowerCase()));
+})
 
 watch(searchInputText, (newValue) => {
   if(!newValue){
