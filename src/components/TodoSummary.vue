@@ -34,6 +34,6 @@
 
 <style lang="postcss" scoped>
 .del-button {
-  @apply bg-yellow-400 text-white mx-1 my-1.5 rounded;
+  @apply bg-green-600 text-white mx-1 my-1.5 rounded;
 }
 </style>
