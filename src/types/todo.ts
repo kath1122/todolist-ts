@@ -1,7 +1,8 @@
 export interface Todo {
     id: number,
     text: string,
-    isComplete: boolean
+    isComplete: boolean,
+    isShow: boolean
 }
 
 export interface CurItem {

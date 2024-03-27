@@ -59,7 +59,7 @@ const saveItem = () => {
 
 
 // TODO event的型別可以去查詢MDN試著加上
-const switchCompleteStatus = (event) => {
+const switchCompleteStatus = (event: Event) => {
   const isChecked = (event.target as HTMLInputElement).checked;
   editData.value = {...props.item, isComplete: isChecked}
   todoStore.updateItem(editData.value, props.index)

@@ -1,18 +1,25 @@
-<script setup lang="ts">
-import TodoInput from './components/TodoInput.vue'
-import TodoList from './components/TodoList.vue'
-import TodoSummary from './components/TodoSummary.vue'
-
-</script>
-
 <template>
-    <div class="justify-center items-center p-5">
-      <TodoInput></TodoInput>
-      <TodoList></TodoList>
-      <TodoSummary></TodoSummary>
-    </div>
+  <div class="navBar">
+    <RouterLink to="/home">Home</RouterLink>
+    <RouterLink to="/todo">TodoList</RouterLink>
+  </div>
+  <router-view></router-view>
 </template>
+<style>
+.navBar {
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
+}
+.navBar a {
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid #000;
+}
 
-<style scoped>
+.navBar a:first-of-type {
+  border: 0;
+}
 
 </style>

@@ -8,7 +8,7 @@
   </el-input>
   <div v-if="todoItems && todoItems.length">
     <ul v-for="(item, index) in searchResult" :key="`${item.id}${index}`">
-      <TodoItem :item="item" :index="index"></TodoItem>
+      <TodoItem :item="item" :index="index" v-show="item.isShow"></TodoItem>
     </ul>
   </div>
 </template>
@@ -25,7 +25,7 @@ const { todoItems } = storeToRefs(todoStore)
 const isFilter = ref(false)
 
 const searchResult = computed(() => {
-  return todoStore.todoItems.filter(task => task.text.toLowerCase().includes(searchInputText.value.toLowerCase()));
+  return todoItems.value.filter(task => task.text.toLowerCase().includes(searchInputText.value.toLowerCase()) );
 })
 
 watch(searchInputText, (newValue) => {
@@ -35,9 +35,3 @@ watch(searchInputText, (newValue) => {
 });
 
 </script>
-
-<style lang="postcss" scoped>
-.padding {
-  @apply px-4 py-2;
-}
-</style>
