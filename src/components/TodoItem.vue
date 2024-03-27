@@ -15,6 +15,7 @@
 import { ref } from 'vue'
 import { useTodoStore } from '../stores/todo'
 import type { Todo,CurItem } from '@/types/todo';
+// TODO: tsconfig 加了compilerOptions還是有紅字
 import { ElMessageBox } from "element-plus";
 
 const props = defineProps({
@@ -57,8 +58,6 @@ const saveItem = () => {
   isEdit.value = false
 }
 
-
-// TODO event的型別可以去查詢MDN試著加上
 const switchCompleteStatus = (event: Event) => {
   const isChecked = (event.target as HTMLInputElement).checked;
   editData.value = {...props.item, isComplete: isChecked}
