@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
-import type { Todo, CurItem } from '../types/todo'
+import type { Todo } from '../types/todo'
 
 export const useTodoStore = defineStore(
   'todo',
@@ -16,7 +16,7 @@ export const useTodoStore = defineStore(
       todoItems.value = todoItems.value.filter((item, idx) => idx !== index)
     }
 
-    function updateItem(item: CurItem, index: number){
+    function updateItem(item: Todo, index: number){
       todoItems.value[index].isComplete = item.isComplete
       todoItems.value[index].text = item.text
     }

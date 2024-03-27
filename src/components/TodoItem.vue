@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useTodoStore } from '../stores/todo'
-import type { Todo,CurItem } from '@/types/todo';
+import type { Todo } from '@/types/todo';
 // TODO: tsconfig 加了compilerOptions還是有紅字
 import { ElMessageBox } from "element-plus";
 
@@ -32,7 +32,7 @@ const props = defineProps({
 const isEdit = ref(false)
 const todoStore = useTodoStore()
 const isComplete = ref<boolean>(props.item.isComplete)
-const editData = ref<CurItem>({text: '', isComplete: isComplete.value})
+const editData = ref<Todo>({text: '', isComplete: isComplete.value})
 
 const deleteItem = () => {
   ElMessageBox.confirm(`确定删除吗？`, "删除操作", {
