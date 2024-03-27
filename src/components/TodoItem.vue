@@ -7,7 +7,7 @@
       </div>
       <button class="bg-green-600 button" v-show="isEdit" type="button" @click="saveItem">save</button>
       <button class="bg-yellow-400 button" v-show="!isEdit" type="button" @click="editItem">edit</button>
-      <button class="bg-red-400 button" type="button" @click="deleteItem">delete</button>
+      <el-button class="bg-red-400 button" :icon="Delete" type="danger" @click="deleteItem">delete</el-button>
     </li>
 </template>
 
@@ -17,6 +17,10 @@ import { useTodoStore } from '../stores/todo'
 import type { Todo } from '@/types/todo';
 // TODO: tsconfig 加了compilerOptions還是有紅字
 import { ElMessageBox } from "element-plus";
+import {
+  Delete
+} from '@element-plus/icons-vue'
+
 
 const props = defineProps({
   item: {

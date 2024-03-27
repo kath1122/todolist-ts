@@ -1,6 +1,6 @@
 <template>
-  <div class="inline-flex w-52 items-center">
-    <span class="text-green-600 font-bold">Not completed: {{ notCompletedCount }}</span> /
+  <div class="inline-flex w-58 items-center">
+    <span class="text-red-400 font-bold">Not completed: {{ notCompletedCount }}</span>&nbsp;/&nbsp;
     <span class="font-bold">Total: {{ total }}</span>
   </div>
   <el-button class="del-button" type="primary" @click="clearCompletedTodos">Clear Task completed</el-button>
@@ -34,6 +34,6 @@
 
 <style lang="postcss" scoped>
 .del-button {
-  @apply bg-red-400 text-white mx-1 my-1.5 rounded;
+  @apply bg-yellow-400 text-white mx-1 my-1.5 rounded;
 }
 </style>

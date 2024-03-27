@@ -1,6 +1,6 @@
 <template>
   <div class="navBar">
-    <RouterLink to="/home">Home</RouterLink>
+    <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/todo">TodoList</RouterLink>
   </div>
   <router-view></router-view>
