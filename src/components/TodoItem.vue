@@ -4,6 +4,7 @@
         <input class="form-checkbox text-green-500 h-5 w-5" type="checkbox" :checked="props.item.isComplete" @change="switchCompleteStatus">
         <!-- 任務名稱 -->
         <span class="w-48 my-1.5 px-4 py-1.5" :class="{'text-gray-400': editData.isComplete }" v-show="!isEdit" @dblclick="editItem">{{props.item?.text}}</span>
+        <el-tag type="danger" v-if="isExpired">expired</el-tag>
         <el-input class="border border-gray-300 rounded-l focus:border-green-500 focus:outline-none" 
           v-show="isEdit" 
           type="text" 
@@ -17,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useTodoStore } from '../stores/todo'
 import type { Todo } from '@/types/todo';
 // TODO: tsconfig 加了compilerOptions還是有紅字
@@ -42,6 +43,13 @@ const isEdit = ref(false)
 const todoStore = useTodoStore()
 const isComplete = ref<boolean>(props.item.isComplete)
 const editData = ref<Todo>({text: '', isComplete: isComplete.value})
+const expirationDate = new Date();
+
+const isExpired = computed(() => {
+  if (!props.item.date) return false;
+  const createdDate = new Date(props.item.date);
+  return createdDate < expirationDate;
+});
 
 const deleteItem = () => {
   ElMessageBox.confirm(`确定删除吗？`, "删除操作", {
