@@ -3,37 +3,22 @@
     <span class="text-red-400 font-bold">Not completed: {{ notCompletedCount }}</span>&nbsp;/&nbsp;
     <span class="font-bold">Total: {{ total }}</span>
   </div>
-  <el-button class="del-button" type="primary" @click="clearCompletedTodos">Clear Task completed</el-button>
 </template>
 
-  <script setup lang="ts">
-  import { computed } from 'vue';
-  import { useTodoStore } from '../stores/todo'
-  import { storeToRefs } from 'pinia';
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useTodoStore } from '../stores/todo'
+import { storeToRefs } from 'pinia';
 
-  const todoStore = useTodoStore()
-  const { todoItems } = storeToRefs(todoStore)
+const todoStore = useTodoStore()
+const { todoItems } = storeToRefs(todoStore)
 
-  const notCompletedCount = computed(() => {
-    const items = todoItems.value
-    return items.filter(item => item && !item.isComplete).length
-  })
-  const total = computed(() => {
-    const items = todoItems.value
-    return items.length
-  })
+const notCompletedCount = computed(() => {
+  return todoItems.value.filter(item => !item.isComplete && item.isShow).length
+})
 
-  const clearCompletedTodos = () => {
-    todoItems.value.forEach((item) => {
-      if (item.isComplete) {
-        item.isShow = false
-      }
-    })
-  }
+const total = computed(() => {
+  return todoItems.value.filter(item => item.isShow).length
+})
+
   </script>
-
-<style lang="postcss" scoped>
-.del-button {
-  @apply bg-green-600 text-white mx-1 my-1.5 rounded;
-}
-</style>
