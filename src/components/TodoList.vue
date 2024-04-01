@@ -12,8 +12,10 @@
     <el-button :class="{ 'focus': currentButton === 'done' }" :icon="CircleCheckFilled" @click="showCompletedTodos">Done</el-button>
   </div>
   <div v-if="todoItems && todoItems.length">
-    <ul v-for="(item, index) in searchResult" :key="`${item.id}${index}`">
-      <TodoItem :item="item" :index="index" v-show="item.isShow"></TodoItem>
+    <ul>
+      <li v-for="(item, index) in searchResult" :key="`${item.id}${index}`">
+        <TodoItem :item="item" :index="index" v-show="item.isShow"></TodoItem>
+      </li>
     </ul>
   </div>
 </template>

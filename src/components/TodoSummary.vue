@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-flex w-58 items-center">
+  <div class="inline-flex w-58 items-center p-5 fixed bottom-0 left-0 right-0">
     <span class="text-red-400 font-bold">Not completed: {{ notCompletedCount }}</span>&nbsp;/&nbsp;
     <span class="font-bold">Total: {{ total }}</span>
   </div>

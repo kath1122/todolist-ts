@@ -1,24 +1,24 @@
 <template>
-    <li class="inline-flex">
-      <div class="inline-flex w-52 items-center">
-        <input class="form-checkbox text-green-500 h-5 w-5" type="checkbox" :checked="props.item.isComplete" @change="switchCompleteStatus">
-        <!-- 任務名稱 -->
-        <span class="w-48 my-1.5 px-4 py-1.5" :class="{'text-gray-400': editData.isComplete }" v-show="!isEdit" @dblclick="editItem">{{props.item?.text}}</span>
-        <el-tag type="danger" v-if="isExpired">expired</el-tag>
-        <el-input class="border border-gray-300 rounded-l focus:border-green-500 focus:outline-none" 
-          v-show="isEdit" 
-          type="text" 
-          v-model="editData.text"
-          @keyup.enter ="saveItem"
-          @blur="saveItem">
-        </el-input>
-      </div>
-      <el-button class="bg-red-400 button" :icon="Delete" type="danger" @click="deleteItem">delete</el-button>
-    </li>
+  <div class="inline-flex items-center justify-between">
+    <input class="form-checkbox text-green-500 h-5 w-5" type="checkbox" :checked="props.item.isComplete" @change="switchCompleteStatus">
+    <!-- 任務名稱 -->
+    <div class="inline-flex items-center w-48">
+      <span class="w-full my-1.5 px-4 py-1.5" :class="{'text-gray-400': editData.isComplete }" v-show="!isEdit" @click="editItem">{{props.item?.text}}</span>
+      <el-input ref="inputRef" :class="{'w-60': isEdit, 'flex-grow': !isEdit}"
+        v-show="isEdit" 
+        type="text" 
+        v-model="editData.text"
+        @keyup.enter ="saveItem"
+        @blur="saveItem">
+      </el-input>
+    </div>
+    <el-tag type="danger" v-if="isExpired">expired</el-tag>
+    <el-button class="bg-red-400 float-right" :icon="Delete" type="danger" @click="deleteItem">delete</el-button>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { useTodoStore } from '../stores/todo'
 import type { Todo } from '@/types/todo';
 // TODO: tsconfig 加了compilerOptions還是有紅字
@@ -44,6 +44,7 @@ const todoStore = useTodoStore()
 const isComplete = ref<boolean>(props.item.isComplete)
 const editData = ref<Todo>({text: '', isComplete: isComplete.value})
 const expirationDate = new Date();
+const inputRef = ref<HTMLInputElement | null>(null); 
 
 const isExpired = computed(() => {
   if (!props.item.date) return false;
@@ -64,6 +65,11 @@ const editItem = () => {
   isEdit.value = true
   editData.value.text = props.item.text
   editData.value.isComplete = props.item.isComplete
+  nextTick(() => {
+    if (inputRef.value !== null) {
+      inputRef.value.focus();
+    }
+  });
 }
 
 const saveItem = () => {
