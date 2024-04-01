@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-input class="max-w-[600px] w-52 rounded-l focus:border-green-500 focus:outline-none"
+  <div class="w-40">
+    <el-input class="max-w-[600px] w-full rounded-l focus:border-green-500 focus:outline-none"
       type="text" 
       v-model="newItemInputText.text"
       placeholder="Enter a todo item.">
