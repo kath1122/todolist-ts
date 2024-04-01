@@ -6,7 +6,11 @@ import type { Todo } from '../types/todo'
 export const useTodoStore = defineStore(
   'todo',
   () => {
-    const todoItems = ref<Todo[]>([])
+    const todoItems = ref<Todo[]>([
+      { text: 'Learn Vue3', isComplete: true },
+      { text: 'Learn TypeScript', isComplete: false },
+      { text: 'Build an amazing TodoList', isComplete: false },
+    ])
     
     function addItem(todo: Todo) {
       todoItems.value.unshift(todo)

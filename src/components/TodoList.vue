@@ -1,6 +1,6 @@
 <template>
   <el-input
-    class="w-52 max-w-[500px]"
+    class="mt-3.5"
     v-model="searchInputText"
     placeholder="Search a todo item."
   >
@@ -9,33 +9,39 @@
   <div class="mt-3.5">
     <el-tabs v-model="currentTab">
       <el-tab-pane label="All Task" name="all">
-        <ul>
-          <li v-for="(item, index) in searchResult" :key="`${item.id}${index}`">
-            <TodoItem :item="item" :index="index"></TodoItem>
-          </li>
-        </ul>
-        <div v-if="searchResult.length === 0">
-          <p>No Data found</p>
+        <div class="tab-content">
+          <ul>
+            <li v-for="(item, index) in searchResult" :key="`${item.id}${index}`">
+              <TodoItem :item="item" :index="index"></TodoItem>
+            </li>
+          </ul>
+          <div v-if="searchResult.length === 0">
+            <p>No Data found</p>
+          </div>
         </div>
       </el-tab-pane>
       <el-tab-pane label="To Do" name="todo">
-        <ul>
-          <li v-for="(item, index) in taskItems" :key="`${item.id}${index}`">
-            <TodoItem :item="item" :index="index"></TodoItem>
-          </li>
-        </ul>
-        <div v-if="taskItems.length === 0">
-          <p>No Data found</p>
+        <div class="tab-content">
+          <ul>
+            <li v-for="(item, index) in taskItems" :key="`${item.id}${index}`">
+              <TodoItem :item="item" :index="index"></TodoItem>
+            </li>
+          </ul>
+          <div v-if="taskItems.length === 0">
+            <p>No Data found</p>
+          </div>
         </div>
       </el-tab-pane>
       <el-tab-pane label="Done" name="done">
-        <ul>
-          <li v-for="(item, index) in taskItems" :key="`${item.id}${index}`">
-            <TodoItem :item="item" :index="index"></TodoItem>
-          </li>
-        </ul>
-        <div v-if="taskItems.length === 0">
-          <p>No Data found</p>
+        <div class="tab-content">
+          <ul>
+            <li v-for="(item, index) in taskItems" :key="`${item.id}${index}`">
+              <TodoItem :item="item" :index="index"></TodoItem>
+            </li>
+          </ul>
+          <div v-if="taskItems.length === 0">
+            <p>No Data found</p>
+          </div>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -70,5 +76,8 @@ const taskItems = computed(() => {
 })
 </script>
 <style lang="postcss" scoped>
-
+.tab-content {
+  height: 300px;
+  overflow-y: auto;
+}
 </style>
