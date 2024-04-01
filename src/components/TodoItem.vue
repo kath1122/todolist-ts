@@ -1,8 +1,8 @@
 <template>
   <div class="inline-flex items-center justify-between">
-    <input class="form-checkbox text-green-500 h-5 w-5" type="checkbox" :checked="props.item.isComplete" @change="switchCompleteStatus">
+    <input class="form-checkbox text-green-500 h-5 w-4" type="checkbox" :checked="props.item.isComplete" @change="switchCompleteStatus">
     <!-- 任務名稱 -->
-    <div class="inline-flex items-center w-48">
+    <div class="inline-flex items-center w-40">
       <span class="w-full my-1.5 px-4 py-1.5" :class="{'text-gray-400': editData.isComplete }" v-show="!isEdit" @click="editItem">{{props.item?.text}}</span>
       <el-input ref="inputRef" :class="{'w-60': isEdit, 'flex-grow': !isEdit}"
         v-show="isEdit" 

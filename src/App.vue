@@ -10,7 +10,11 @@
   width: 100%;
   font-size: 12px;
   text-align: center;
-  margin-top: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background-color: #fff;
 }
 .navBar a {
   display: inline-block;
@@ -21,5 +25,4 @@
 .navBar a:first-of-type {
   border: 0;
 }
-
 </style>

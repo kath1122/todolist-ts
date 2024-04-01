@@ -7,12 +7,7 @@ export const useTodoStore = defineStore(
   'todo',
   () => {
     const todoItems = ref<Todo[]>([])
-    const currentStatus = ref<string>('all')
-
-    function switchStatus(status: string) {
-      currentStatus.value = status
-    }
-
+    
     function addItem(todo: Todo) {
       todoItems.value.unshift(todo)
     }
@@ -28,8 +23,6 @@ export const useTodoStore = defineStore(
 
     return {
       todoItems,
-      currentStatus,
-      switchStatus,
       addItem,
       deleteItem,
       updateItem
@@ -38,7 +31,7 @@ export const useTodoStore = defineStore(
   {
     persist: {
       storage: localStorage,
-      paths: ['todoItems', 'currentStatus'],
+      paths: ['todoItems'],
     },
   },
 )
