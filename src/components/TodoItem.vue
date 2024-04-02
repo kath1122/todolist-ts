@@ -1,5 +1,15 @@
 <template>
   <div class="inline-flex items-center justify-between">
+    <div class="fixed-column">
+        <el-tooltip
+          class="box-item"
+          effect="dark"
+          content="expired"
+          placement="right-start"
+        >
+          <el-icon v-if="isExpired" color="red"><WarningFilled /></el-icon>
+        </el-tooltip>
+    </div>
     <input class="form-checkbox text-green-500 h-5 w-4" type="checkbox" :checked="props.item.isComplete" @change="switchCompleteStatus">
     <!-- 任務名稱 -->
     <div class="inline-flex items-center w-40">
@@ -12,8 +22,9 @@
         @blur="saveItem">
       </el-input>
     </div>
-    <el-tag type="danger" v-if="isExpired">expired</el-tag>
-    <el-button class="bg-red-400 float-right" :icon="Delete" type="danger" @click="deleteItem">delete</el-button>
+    <div class="inline-flex items-center">
+      <el-button class="bg-red-400 float-right" :icon="Delete" type="danger" @click="deleteItem">delete</el-button>
+    </div>
   </div>
 </template>
 
@@ -24,7 +35,7 @@ import type { Todo } from '@/types/todo';
 // TODO: tsconfig 加了compilerOptions還是有紅字
 import { ElMessageBox } from "element-plus";
 import {
-  Delete
+  Delete, WarningFilled
 } from '@element-plus/icons-vue'
 
 
@@ -53,9 +64,9 @@ const isExpired = computed(() => {
 });
 
 const deleteItem = () => {
-  ElMessageBox.confirm(`确定删除吗？`, "删除操作", {
-    confirmButtonText: "删除",
-    cancelButtonText: "取消",
+  ElMessageBox.confirm(`Confirm to delete?`, "Delete operation", {
+    confirmButtonText: "Delete",
+    cancelButtonText: "cancel",
     type: "warning",
   }).then(() => {
     todoStore.deleteItem(props.index)
@@ -90,5 +101,8 @@ const switchCompleteStatus = (event: Event) => {
 <style lang="postcss" scoped>
 .button {
   @apply text-white mx-1 my-1.5 px-4 py-1.5 rounded;
+}
+.fixed-column {
+  width: 30px;
 }
 </style>
