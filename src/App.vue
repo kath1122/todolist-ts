@@ -15,6 +15,7 @@
   left: 0;
   z-index: 999;
   background-color: #fff;
+  padding: 1rem 0;
 }
 .navBar a {
   display: inline-block;
