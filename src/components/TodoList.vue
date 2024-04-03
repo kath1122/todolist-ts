@@ -1,12 +1,10 @@
 <template>
   <el-input
-    class="mt-3.5"
-    v-model="searchInputText"
     placeholder="Search a todo item."
   >
     <template #prepend>Search</template>
   </el-input>
-  <div class="mt-3.5">
+  <div class="px-4">
     <el-tabs v-model="currentTab">
       <el-tab-pane label="All Task" name="all">
         <div class="tab-content">
@@ -52,7 +50,7 @@
 import { useTodoStore } from '../stores/todo'
 import { storeToRefs } from 'pinia';
 import TodoItem from './TodoItem.vue'
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const searchInputText = ref<string>('')
 const todoStore = useTodoStore()
@@ -74,10 +72,28 @@ const taskItems = computed(() => {
     }
   });
 })
+
+const setTodoListHeight = () => {
+  const navbarHeight = 64
+  const addTodoHeight = 108
+  const windowHeight = window.innerHeight;
+  const searchInputHeight = 32;
+  const totalCountHeight = 65;
+  const tabHeight = 40;
+  const todoListHeight = (windowHeight - navbarHeight - addTodoHeight - searchInputHeight - totalCountHeight - tabHeight)
+  const tabContents = document.querySelectorAll('.tab-content');
+  tabContents.forEach(tabContent => {
+    (tabContent as HTMLElement).style.height = `${todoListHeight}px`;
+  });
+};
+
+onMounted(() => {
+  setTodoListHeight();
+  window.addEventListener('resize', setTodoListHeight);
+})
 </script>
 <style lang="postcss" scoped>
 .tab-content {
-  height: 300px;
   overflow-y: auto;
 }
 </style>

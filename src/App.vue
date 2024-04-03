@@ -1,5 +1,5 @@
 <template>
-  <div class="navBar">
+  <div class="navbar fixed top-0 left-0 w-full h-16 flex items-center justify-center">
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/todo">TodoList</RouterLink>
   </div>
@@ -13,7 +13,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
   background-color: #fff;
   padding: 1rem 0;
 }
