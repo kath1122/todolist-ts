@@ -43,6 +43,8 @@
         </div>
       </el-tab-pane>
     </el-tabs>
+
+    <p class="text-right text-sm text-green-600">* task項目前有<el-icon color="red"><WarningFilled /></el-icon>符號 表示任務已過期</p>
   </div>
 </template>
 
@@ -51,6 +53,10 @@ import { useTodoStore } from '../stores/todo'
 import { storeToRefs } from 'pinia';
 import TodoItem from './TodoItem.vue'
 import { computed, onMounted, ref } from 'vue';
+import {
+  WarningFilled
+} from '@element-plus/icons-vue'
+
 
 const searchInputText = ref<string>('')
 const todoStore = useTodoStore()
@@ -80,7 +86,7 @@ const setTodoListHeight = () => {
   const searchInputHeight = 32;
   const totalCountHeight = 65;
   const tabHeight = 40;
-  const todoListHeight = (windowHeight - navbarHeight - addTodoHeight - searchInputHeight - totalCountHeight - tabHeight)
+  const todoListHeight = (windowHeight - navbarHeight - addTodoHeight - searchInputHeight - totalCountHeight - tabHeight-24)
   const tabContents = document.querySelectorAll('.tab-content');
   tabContents.forEach(tabContent => {
     (tabContent as HTMLElement).style.height = `${todoListHeight}px`;
