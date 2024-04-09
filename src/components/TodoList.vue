@@ -21,7 +21,7 @@
       <el-tab-pane label="To Do" name="todo">
         <div class="tab-content">
           <ul>
-            <li v-for="(item, index) in taskItems" :key="`${item.id}${index}`">
+            <li v-for="(item, index) in taskItems" :key="`todo-${item.id}${index}`">
               <TodoItem :item="item" :index="index"></TodoItem>
             </li>
           </ul>
@@ -33,7 +33,7 @@
       <el-tab-pane label="Done" name="done">
         <div class="tab-content">
           <ul>
-            <li v-for="(item, index) in taskItems" :key="`${item.id}${index}`">
+            <li v-for="(item, index) in taskItems" :key="`done-${item.id}${index}`">
               <TodoItem :item="item" :index="index"></TodoItem>
             </li>
           </ul>
