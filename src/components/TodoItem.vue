@@ -1,13 +1,13 @@
 <template>
   <div class="inline-flex items-center justify-between">
     <div class="fixed-column">
-        <el-tooltip
+        <el-tooltip v-if="isExpired"
           class="box-item"
           effect="dark"
           content="expired"
           placement="right-start"
         >
-          <el-icon v-if="isExpired" color="red"><WarningFilled /></el-icon>
+          <el-icon color="red"><WarningFilled /></el-icon>
         </el-tooltip>
     </div>
     <input class="form-checkbox text-green-500 h-5 w-4" type="checkbox" :checked="props.item.isComplete" @change="switchCompleteStatus">
