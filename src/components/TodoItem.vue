@@ -53,7 +53,7 @@ const props = defineProps({
 const isEdit = ref(false)
 const todoStore = useTodoStore()
 const isComplete = ref<boolean>(props.item.isComplete)
-const editData = ref<Todo>({text: '', isComplete: isComplete.value})
+const editData = ref<Todo>({text: '', isComplete: isComplete.value, id: 0})
 const expirationDate = new Date();
 const inputRef = ref<HTMLInputElement | null>(null); 
 
@@ -69,11 +69,12 @@ const deleteItem = () => {
     cancelButtonText: "cancel",
     type: "warning",
   }).then(() => {
-    todoStore.deleteItem(props.index)
+    todoStore.deleteItem(props.item.id ?? 0)
   });
 }
 const editItem = () => {
   isEdit.value = true
+  editData.value.id = props.item.id
   editData.value.text = props.item.text
   editData.value.isComplete = props.item.isComplete
   nextTick(() => {
@@ -87,7 +88,7 @@ const saveItem = () => {
   if(!editData.value.text){
       return
   }
-  todoStore.updateItem(editData.value, props.index)
+  todoStore.updateItem(editData.value, props.item.id ?? 0)
   editData.value.text = ''
   isEdit.value = false
 }
@@ -95,7 +96,7 @@ const saveItem = () => {
 const switchCompleteStatus = (event: Event) => {
   const isChecked = (event.target as HTMLInputElement).checked;
   editData.value = {...props.item, isComplete: isChecked}
-  todoStore.updateItem(editData.value, props.index)
+  todoStore.updateItem(editData.value, props.item.id ?? 0)
 }
 </script>
 <style lang="postcss" scoped>
