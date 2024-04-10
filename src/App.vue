@@ -1,6 +1,8 @@
 <template>
   <div class="navbar fixed top-0 left-0 w-full h-16 flex items-center justify-center">
-    <RouterLink to="/">Home</RouterLink>
+    <div class="mr-4">
+      <RouterLink to="/">Home</RouterLink>
+    </div>
     <RouterLink to="/todo">TodoList</RouterLink>
   </div>
   <router-view></router-view>

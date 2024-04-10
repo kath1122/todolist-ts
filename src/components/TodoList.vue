@@ -1,9 +1,12 @@
 <template>
-  <el-input
-    placeholder="Search a todo item."
-  >
-    <template #prepend>Search</template>
-  </el-input>
+  <div class="px-4">
+    <el-input
+      v-model="searchInputText"
+      placeholder="Search a todo item."
+    >
+      <template #prepend>Search</template>
+    </el-input>
+  </div>
   <div class="px-4">
     <el-tabs v-model="currentTab">
       <el-tab-pane label="All Task" name="all">
@@ -14,7 +17,7 @@
             </li>
           </ul>
           <div v-if="searchResult.length === 0">
-            <p>No Data found</p>
+            <p class="text-center">No Data found</p>
           </div>
         </div>
       </el-tab-pane>
@@ -26,7 +29,7 @@
             </li>
           </ul>
           <div v-if="taskItems.length === 0">
-            <p>No Data found</p>
+            <p class="text-center">No Data found</p>
           </div>
         </div>
       </el-tab-pane>
@@ -38,13 +41,13 @@
             </li>
           </ul>
           <div v-if="taskItems.length === 0">
-            <p>No Data found</p>
+            <p class="text-center">No Data found</p>
           </div>
         </div>
       </el-tab-pane>
     </el-tabs>
 
-    <p class="text-right text-sm text-green-600">* task項目前有<el-icon color="red"><WarningFilled /></el-icon>符號 表示任務已過期</p>
+    <p class="text-center text-sm text-green-600">* task項目前有<el-icon color="red"><WarningFilled /></el-icon>符號 表示任務已過期</p>
   </div>
 </template>
 
