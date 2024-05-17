@@ -1,0 +1,12 @@
+# 使用 3.8 版的設定檔，通常新版本會有新的功能，並支援新的設定參數
+version: "3.8"
+
+services:
+  vue_fe:
+    container_name: vue-3-docker
+    image: vuedocker
+    ports:
+      - "8888:80"
+    volumes:
+      - ./:/var/www/html/app
+    tty: true
