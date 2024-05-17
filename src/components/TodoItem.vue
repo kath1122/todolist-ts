@@ -38,7 +38,9 @@ import { ElMessageBox } from "element-plus";
 import {
   Delete, WarningFilled
 } from '@element-plus/icons-vue'
-
+import {
+    putTaskItem,delTaskItem
+  } from "@/api";
 
 const props = defineProps({
   item: {
@@ -71,7 +73,10 @@ const deleteItem = () => {
     cancelButtonText: "cancel",
     type: "warning",
   }).then(() => {
-    todoStore.deleteItem(props.item.id ?? 0)
+    // todoStore.deleteItem(props.item.id ?? 0)
+    delTaskItem(props.item.id).then(() => {
+    window.location.reload();
+  });
   });
 }
 const editItem = () => {
@@ -90,7 +95,12 @@ const saveItem = () => {
   if(!editData.value.text){
       return
   }
-  todoStore.updateItem(editData.value, props.item.id ?? 0)
+  // todoStore.updateItem(editData.value, props.item.id ?? 0)
+  putTaskItem(editData.value, props.item.id).then(({ data }) => {
+    alert(data.message)
+    window.location.reload();
+  });
+  
   editData.value.text = ''
   isEdit.value = false
 }

@@ -16,15 +16,16 @@
 
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { useTodoStore } from '../stores/todo'
   import type { Todo } from '@/types/todo';
+  import {
+    addNewTask
+  } from "@/api";
 
-  const todoStore = useTodoStore()
+
   const newItemInputText = ref<{ text: string; date: Date | null }>({
     text: '',
     date: null
   })
-
 
   const addItem = () => {
     if(!newItemInputText.value.text.trim()) {
@@ -38,7 +39,9 @@
       isComplete: false,
       isShow: true
     }
-    todoStore.addItem(todo)
+    addNewTask(todo).then(({ data }) => {
+      // window.location.reload();
+    });
     newItemInputText.value.text = ''
     newItemInputText.value.date = null
   }

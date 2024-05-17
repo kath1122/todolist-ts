@@ -52,6 +52,10 @@
 </template>
 
 <script setup lang="ts">
+import {
+  getAllTasks
+} from "@/api";
+
 import { useTodoStore } from '../stores/todo'
 import { storeToRefs } from 'pinia';
 import TodoItem from './TodoItem.vue'
@@ -60,14 +64,19 @@ import {
   WarningFilled
 } from '@element-plus/icons-vue'
 
-
+interface Task {
+  text: string;
+  isComplete: boolean;
+}
 const searchInputText = ref<string>('')
 const todoStore = useTodoStore()
 const { todoItems } = storeToRefs(todoStore)
 const currentTab = ref('all');
+const allTaskList = ref<Task[]>([])
+const allTaskCount = computed(() => todoItems.value.length);
 
 const searchResult = computed(() => {
-  return todoItems.value.filter(task => task.text.toLowerCase().includes(searchInputText.value.toLowerCase()) );
+  return allTaskList.value.filter(task => task.text && task.text.toLowerCase().includes(searchInputText.value.toLowerCase()) );
 })
 
 const taskItems = computed(() => {
@@ -95,8 +104,16 @@ const setTodoListHeight = () => {
     (tabContent as HTMLElement).style.height = `${todoListHeight}px`;
   });
 };
+const getApi = () => {
+  getAllTasks().then((response) => {
+      if (response.data) {
+        allTaskList.value = response.data.listing;
+      }
+    });
+}
 
 onMounted(() => {
+  getApi()
   setTodoListHeight();
   window.addEventListener('resize', setTodoListHeight);
 })
