@@ -12,7 +12,7 @@
       <el-tab-pane label="All Task" name="all">
         <div class="tab-content">
           <ul>
-            <li v-for="(item, index) in searchResult" :key="`${item.id}${index}`">
+            <li v-for="(item, index) in searchResult" :key="index">
               <TodoItem :item="item" :index="index"></TodoItem>
             </li>
           </ul>
@@ -24,7 +24,7 @@
       <el-tab-pane label="To Do" name="todo">
         <div class="tab-content">
           <ul>
-            <li v-for="(item, index) in taskItems" :key="`todo-${item.id}${index}`">
+            <li v-for="(item, index) in taskItems" :key="`todo-${index}`">
               <TodoItem :item="item" :index="index"></TodoItem>
             </li>
           </ul>
@@ -36,7 +36,7 @@
       <el-tab-pane label="Done" name="done">
         <div class="tab-content">
           <ul>
-            <li v-for="(item, index) in taskItems" :key="`done-${item.id}${index}`">
+            <li v-for="(item, index) in taskItems" :key="`done-${index}`">
               <TodoItem :item="item" :index="index"></TodoItem>
             </li>
           </ul>
