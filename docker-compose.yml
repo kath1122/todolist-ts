@@ -2,11 +2,17 @@
 version: "3.8"
 
 services:
-  vue_fe:
+  vue_frontend:
     container_name: vue-3-docker
     image: vuedocker
     ports:
       - "8888:80"
     volumes:
       - ./:/var/www/html/app
+    tty: true
+  express_backend:
+    container_name: express-docker
+    image: expressdocker
+    ports:
+      - "3001:3001"
     tty: true
