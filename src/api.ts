@@ -1,29 +1,30 @@
 import request from "@/utils/request";
+import type { Todo,TodoList } from '@/types/todo';
 
 export function getAllTasks() {
-  return request({
+  return request<TodoList>({
     url: "/employees",
     method: "get",
   });
 }
 
-export function addNewTask(form) {
+export function addNewTask(task: Todo) {
   return request({
     url: "/employee",
     method: "post",
-    data: form 
+    data: task 
   });
 }
 
-export function putTaskItem(form, id) {
+export function putTaskItem(task: Todo, id: number) {
   return request({
     url: `/employee/${id}`,
     method: "put",
-    data: form 
+    data: task 
   });
 }
 
-export function delTaskItem(id) {
+export function delTaskItem(id: number) {
   return request({
     url: `/employee/${id}`,
     method: "delete"

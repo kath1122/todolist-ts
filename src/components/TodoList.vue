@@ -76,7 +76,7 @@ const allTaskList = ref<Task[]>([])
 const allTaskCount = computed(() => todoItems.value.length);
 
 const searchResult = computed(() => {
-  return allTaskList.value.filter(task => task.text && task.text.toLowerCase().includes(searchInputText.value.toLowerCase()) );
+  return allTaskList.value && allTaskList.value.length > 0?allTaskList.value.filter(task => task.text && task.text.toLowerCase().includes(searchInputText.value.toLowerCase()) ): [];
 })
 
 const taskItems = computed(() => {
@@ -107,7 +107,7 @@ const setTodoListHeight = () => {
 const getApi = () => {
   getAllTasks().then((response) => {
       if (response.data) {
-        allTaskList.value = response.data.listing;
+        allTaskList.value = response.data.listing && response.data.listing.length > 0 ? response.data.listing : [];
       }
     });
 }

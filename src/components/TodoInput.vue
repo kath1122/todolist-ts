@@ -35,12 +35,13 @@
     const todo: Todo = {
       id: Date.now(),
       text: newItemInputText.value.text,
-      date: newItemInputText.value.date,
+      date: newItemInputText.value.date?.toString(),
       isComplete: false,
       isShow: true
     }
     addNewTask(todo).then(({ data }) => {
-      // window.location.reload();
+      alert(data.message)
+      window.location.reload();
     });
     newItemInputText.value.text = ''
     newItemInputText.value.date = null

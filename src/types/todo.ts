@@ -3,5 +3,10 @@ export interface Todo {
     text: string,
     isComplete: boolean,
     isShow?: boolean,
-    date?: Date | null;
+    date?: string | null;
+}
+
+export interface TodoList {
+    count: number;
+    listing: Todo[];
 }

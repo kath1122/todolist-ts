@@ -74,7 +74,7 @@ const deleteItem = () => {
     type: "warning",
   }).then(() => {
     // todoStore.deleteItem(props.item.id ?? 0)
-    delTaskItem(props.item.id).then(() => {
+    delTaskItem(props.item.id ?? 0).then(() => {
     window.location.reload();
   });
   });
@@ -96,7 +96,7 @@ const saveItem = () => {
       return
   }
   // todoStore.updateItem(editData.value, props.item.id ?? 0)
-  putTaskItem(editData.value, props.item.id).then(({ data }) => {
+  putTaskItem(editData.value, props.item.id ?? 0).then(({ data }) => {
     alert(data.message)
     window.location.reload();
   });
