@@ -3,14 +3,14 @@ import type { Todo,TodoList } from '@/types/todo';
 
 export function getAllTasks() {
   return request<TodoList>({
-    url: "/employees",
+    url: "/tasks",
     method: "get",
   });
 }
 
 export function addNewTask(task: Todo) {
   return request({
-    url: "/employee",
+    url: "/task",
     method: "post",
     data: task 
   });
@@ -18,7 +18,7 @@ export function addNewTask(task: Todo) {
 
 export function putTaskItem(task: Todo, id: number) {
   return request({
-    url: `/employee/${id}`,
+    url: `/task/${id}`,
     method: "put",
     data: task 
   });
@@ -26,7 +26,7 @@ export function putTaskItem(task: Todo, id: number) {
 
 export function delTaskItem(id: number) {
   return request({
-    url: `/employee/${id}`,
+    url: `/task/${id}`,
     method: "delete"
   });
 }
