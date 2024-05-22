@@ -22,6 +22,7 @@ FROM nginx:stable-alpine as production-stage
 
 #拷貝 從build-stage這個步驟的 /app/dist 裡面的檔案 到 nginx的 /usr/share/nginx/html 資料夾下 （也就是我們vue3開發後的打包檔案)
 COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 #把80 Port對外開放
 EXPOSE 80
