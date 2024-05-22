@@ -64,19 +64,13 @@ import {
   WarningFilled
 } from '@element-plus/icons-vue'
 
-interface Task {
-  text: string;
-  isComplete: boolean;
-}
 const searchInputText = ref<string>('')
 const todoStore = useTodoStore()
 const { todoItems } = storeToRefs(todoStore)
 const currentTab = ref('all');
-const allTaskList = ref<Task[]>([])
-const allTaskCount = computed(() => todoItems.value.length);
 
 const searchResult = computed(() => {
-  return allTaskList.value && allTaskList.value.length > 0?allTaskList.value.filter(task => task.text && task.text.toLowerCase().includes(searchInputText.value.toLowerCase()) ): [];
+  return todoItems.value && todoItems.value.length > 0?todoItems.value.filter(task => task.text && task.text.toLowerCase().includes(searchInputText.value.toLowerCase()) ): [];
 })
 
 const taskItems = computed(() => {
@@ -107,7 +101,7 @@ const setTodoListHeight = () => {
 const getApi = () => {
   getAllTasks().then((response) => {
       if (response.data) {
-        allTaskList.value = response.data.listing && response.data.listing.length > 0 ? response.data.listing : [];
+        todoItems.value = response.data.listing && response.data.listing.length > 0 ? response.data.listing : [];
       }
     });
 }

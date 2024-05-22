@@ -6,11 +6,7 @@ import type { Todo } from '../types/todo'
 export const useTodoStore = defineStore(
   'todo',
   () => {
-    const todoItems = ref<Todo[]>([
-      { text: 'Learn Vue3', isComplete: true, id: 1 },
-      { text: 'Learn TypeScript', isComplete: false, id: 2 },
-      { text: 'Build an amazing TodoList', isComplete: false, id: 3},
-    ])
+    const todoItems = ref<Todo[]>([])
     
     function getItemIndex(id: number){
       return todoItems.value.findIndex(function(todo){

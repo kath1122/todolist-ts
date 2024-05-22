@@ -41,7 +41,6 @@
     }
     addNewTask(todo).then(({ data }) => {
       alert(data.message)
-      window.location.reload();
     });
     newItemInputText.value.text = ''
     newItemInputText.value.date = null

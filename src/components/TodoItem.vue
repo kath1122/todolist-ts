@@ -73,10 +73,10 @@ const deleteItem = () => {
     cancelButtonText: "cancel",
     type: "warning",
   }).then(() => {
-    // todoStore.deleteItem(props.item.id ?? 0)
+    todoStore.deleteItem(props.item.id ?? 0)
     delTaskItem(props.item.id ?? 0).then(() => {
-    window.location.reload();
-  });
+      alert('This todo has been deleted')
+    });
   });
 }
 const editItem = () => {
@@ -95,10 +95,10 @@ const saveItem = () => {
   if(!editData.value.text){
       return
   }
-  // todoStore.updateItem(editData.value, props.item.id ?? 0)
+
+  todoStore.updateItem(editData.value, props.item.id ?? 0)
   putTaskItem(editData.value, props.item.id ?? 0).then(({ data }) => {
     alert(data.message)
-    window.location.reload();
   });
   
   editData.value.text = ''
@@ -109,6 +109,9 @@ const switchCompleteStatus = (event: Event) => {
   const isChecked = (event.target as HTMLInputElement).checked;
   editData.value = {...props.item, isComplete: isChecked}
   todoStore.updateItem(editData.value, props.item.id ?? 0)
+  putTaskItem(editData.value, props.item.id ?? 0).then(({ data }) => {
+    alert(data.message)
+  });
 }
 </script>
 <style lang="postcss" scoped>
