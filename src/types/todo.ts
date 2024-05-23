@@ -1,10 +1,12 @@
 export interface Todo {
-    id: number,
+    id?: number,
     text: string,
-    isComplete: boolean
+    isComplete: boolean,
+    isShow?: boolean,
+    date?: string | null;
 }
 
-export interface CurItem {
-    text: string,
-    isComplete: boolean
+export interface TodoList {
+    count: number;
+    listing: Todo[];
 }

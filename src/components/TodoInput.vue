@@ -1,40 +1,52 @@
 <template>
-    <div class="todo-header margin">
-      <input type="text" v-model="newItem" placeholder="輸入一條代辦事項"  class="fix-width">
-      <button type="button" @click="addItem">新增</button>
-    </div>
-  </template>
-  
-  <script setup lang="ts">
+  <div class="mt-16 px-4">
+    <el-input class="w-full"
+      type="text" 
+      v-model="newItemInputText.text"
+      placeholder="Enter a todo item.">
+    </el-input>
+    <el-date-picker
+      v-model="newItemInputText.date"
+      type="date"
+      placeholder="Select date">
+    </el-date-picker>
+    <el-button class="px-4 py-2 bg-green-600 text-white mx-1 my-1.5 rounded cursor-pointer" @click="addItem">Submit</el-button>
+  </div>
+</template>
+
+<script setup lang="ts">
   import { ref } from 'vue'
   import { useTodoStore } from '../stores/todo'
   import type { Todo } from '@/types/todo';
-  
+  import {
+    addNewTask
+  } from "@/api";
+
+
   const todoStore = useTodoStore()
-  const newItem = ref<string>('')
-  
+  const newItemInputText = ref<{ text: string; date: Date | null }>({
+    text: '',
+    date: null
+  })
+
   const addItem = () => {
-    if(!newItem.value.trim()) {
+    if(!newItemInputText.value.text.trim()) {
       console.log('請輸入值')
       return
     }
     const todo: Todo = {
       id: Date.now(),
-      text: newItem.value,
-      isComplete: false
+      text: newItemInputText.value.text,
+      date: newItemInputText.value.date?.toString(),
+      isComplete: false,
+      isShow: true
     }
     todoStore.addItem(todo)
-    newItem.value = ''
-  }
 
-  </script>
-  
-  <style scoped>
-  .margin{
-    margin: 10px 0px;
+    addNewTask(todo).then(({ data }) => {
+      alert(data.message)
+    });
+    newItemInputText.value.text = ''
+    newItemInputText.value.date = null
   }
-  .fix-width{
-    width: 200px;
-  }
-  </style>
-  
+</script>

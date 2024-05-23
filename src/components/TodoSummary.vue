@@ -1,38 +1,29 @@
 <template>
-  <hr>
-  <span class="fix-width">
-    <span class="completed sum">已完成: {{ completeItems }}</span> / 
-    <span class="sum">全部: {{ total }}</span>
-  </span>
-  <button type="button" @click="clearCompletedTodos">清除已完成</button>
+  <div class="inline-flex w-58 items-center p-5 fixed bottom-0 left-0 right-0 justify-center">
+    <span class="text-red-400 font-bold">To Do: {{ notCompletedCount }}</span>&nbsp;/&nbsp;
+    <span class="text-red-400 font-bold">Done: {{ completedCount }}</span>&nbsp;/&nbsp;
+    <span class="font-bold">Total: {{ total }}</span>
+  </div>
 </template>
-  
-  <script setup lang="ts">
-  import { computed } from 'vue';
-  import { useTodoStore } from '../stores/todo'
-  
-  const completeItems = computed(() => useTodoStore().todoItems.filter(item => item.isComplete).length)
-  const total = computed(() => useTodoStore().todoItems.length)
-  
-  const clearCompletedTodos = () => {
-    useTodoStore().todoItems.forEach((item)=>{
-      if(item.isComplete){
-        useTodoStore().deleteItem(item.id)
-      }
-    })
-  }
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useTodoStore } from '../stores/todo'
+import { storeToRefs } from 'pinia';
+
+const todoStore = useTodoStore()
+const { todoItems } = storeToRefs(todoStore)
+
+const notCompletedCount = computed(() => {
+  return todoItems.value.filter(item => !item.isComplete).length;
+})
+
+const completedCount = computed(() => {
+  return todoItems.value.filter(item => item.isComplete).length;
+})
+
+const total = computed(() => {
+  return todoItems.value.length
+})
+
   </script>
-  
-  <style scoped>
-  .completed {
-    color: green;
-  }
-  .sum {
-    font-weight: bold;
-  }
-  .fix-width{
-    display: inline-block;
-    width: 213px;
-  }
-  </style>
-  
