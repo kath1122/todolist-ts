@@ -14,7 +14,7 @@
       <input class="form-checkbox w-full h-full" type="checkbox" :checked="props.item.isComplete" @change="switchCompleteStatus">
     </label>
     <div class="inline-flex items-center w-40">
-      <span ref="spanRef" class="w-full px-3 my-1.5 py-1.5 overflow-hidden overflow-ellipsis" :class="{'text-gray-400': editData.isComplete }" v-show="!isEdit" @click="editItem">{{props.item?.text}}</span>
+      <span ref="spanRef" class="w-full px-3 my-1.5 py-1.5 overflow-hidden overflow-ellipsis" :class="{'text-gray-400': props.item.isComplete }" v-show="!isEdit" @click="editItem">{{props.item?.text}}</span>
       <el-input ref="inputRef" :class="{'w-60': isEdit, 'flex-grow': !isEdit}"
         v-show="isEdit"
         type="text" 
@@ -75,7 +75,7 @@ const deleteItem = () => {
   }).then(() => {
     todoStore.deleteItem(props.item.id ?? 0)
     delTaskItem(props.item.id ?? 0).then(() => {
-      alert('This todo has been deleted')
+      // alert('This todo has been deleted')
     });
   });
 }
